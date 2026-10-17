@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love You Animation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3rem;
+            text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            user-select: none;
+            margin: 0;
+            z-index: 10;
+            text-align: center;
+        }
+
+        h1:hover {
+            transform: scale(1.05);
+        }
+
+        p {
+            color: #ffe6eb;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            z-index: 10;
+        }
+
+        .heart-box {
+            position: absolute;
+            bottom: 20%;
+            animation: floatUp 2.5s linear forwards;
+            pointer-events: none;
+            text-align: center;
+            z-index: 5;
+        }
+
+        .heart {
+            font-size: 28px;
+        }
+
+        .love-text {
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
+            margin-top: 5px;
+            white-space: nowrap;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-400px) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="clickBtn">Click Here ❤️</h1>
+    <p>(Yahan click karein)</p>
+
+    <script>
+        const btn = document.getElementById('clickBtn');
+
+        btn.addEventListener('click', function(e) {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+        });
+
+        function createHeart() {
+            const box = document.createElement('div');
+            box.classList.add('heart-box');
+
+            // Random horizontal position
+            const randomX = (Math.random() - 0.5) * 350;
+            box.style.left = `calc(50% + ${randomX}px)`;
+
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+
+            const text = document.createElement('div');
+            text.classList.add('love-text');
+            text.innerText = 'I Love You';
+
+            box.appendChild(heart);
+            box.appendChild(text);
+            document.body.appendChild(box);
+
+            setTimeout(() => {
+                box.remove();
+            }, 2500);
+        }
+    </script>
+
+</body>
+</html>
